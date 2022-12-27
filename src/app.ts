@@ -1,34 +1,70 @@
-import { Invoice } from './classes/Invoice.js';
-import { Payment } from './classes/Payment.js';
-import { HasFormatter } from './interfaces/HasFormatter.js';
+// interfaces
+interface IsPerson {
+    name: string;
+    age: number;
 
-// let docOne: HasFormatter;
-// let docTwo: HasFormatter;
+    speak(text: string): void;
 
-// docOne = new Invoice('yoshi', 'web work', 250);
-// docTwo = new Payment('mario', 'plumbing', 200);
+    spend(amount: number): number;
+}
 
-// let docs: HasFormatter[] = [];
-// docs.push(docOne);
-// docs.push(docTwo);
+let me: IsPerson = {
+    name: "tom",
+    age: 20,
+    speak(text: string) {
+        console.log(text);
+    },
+    spend(amount: number): number {
+        console.log("spent:", amount);
+        return amount;
+    }
+}
+console.log(me);
 
-const form = document.querySelector('.new-item-form') as HTMLFormElement;
-console.log(form.children);
+const greetPerson = (person: IsPerson) => {
+    console.log("hello", person.name);
+}
+
+greetPerson(me);
+
+import {Invoice} from "./classes/Invoice.js";
+
+const invOne = new Invoice("tom", "work on the website", 123);
+const invTwo = new Invoice("bob", "work on the music", 34);
+console.log(invOne, invTwo);
+
+let invoices: Invoice[] = [];
+invoices.push(invOne);
+invoices.push(invTwo);
+
+invoices.forEach(i => {
+    console.log(i.client, i.amount, "|", i.format());
+})
 
 // inputs
-const type = document.querySelector('#type') as HTMLInputElement;
-const tofrom = document.querySelector('#tofrom') as HTMLInputElement;
-const details = document.querySelector('#details') as HTMLInputElement;
-const amount = document.querySelector('#amount') as HTMLInputElement;
+{
+    const anchor = document.querySelector("a");
 
-form.addEventListener('submit', (e: Event) => {
-  e.preventDefault();
+    if (anchor) {
+        console.log(anchor.href);
+    }
 
-  let doc: HasFormatter;
-  if (type.value === 'invoice') {
-    doc = new Invoice(tofrom.value, details.value, amount.valueAsNumber);
-  } else {
-    doc = new Payment(tofrom.value, details.value, amount.valueAsNumber);
-  }
-  console.log(doc);
-});
+    const form = document.querySelector(".new-item-form") as HTMLFormElement;
+    console.log(form.children);
+
+// inputs
+    const type = document.querySelector("#type") as HTMLSelectElement;
+    const tofrom = document.querySelector("#tofrom") as HTMLInputElement;
+    const details = document.querySelector("#details") as HTMLInputElement;
+    const amount = document.querySelector("#amount") as HTMLInputElement;
+
+    form.addEventListener("submit", (e: Event) => {
+        e.preventDefault();
+        console.log(
+            type.value,
+            tofrom.value,
+            details.value,
+            amount.valueAsNumber
+        );
+    })
+}
