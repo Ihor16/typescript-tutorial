@@ -12,11 +12,12 @@ form.addEventListener("submit", (e) => {
     e.preventDefault();
     let doc;
     let heading = type.value;
+    let values = [tofrom.value, details.value, amount.valueAsNumber];
     if (heading === "invoice") {
-        doc = new Invoice(tofrom.value, details.value, amount.valueAsNumber);
+        doc = new Invoice(...values);
     }
     else {
-        doc = new Payment(tofrom.value, details.value, amount.valueAsNumber);
+        doc = new Payment(...values);
     }
     list.render(doc, heading);
 });
