@@ -1,70 +1,12 @@
-// interfaces
-interface IsPerson {
-    name: string;
-    age: number;
+import {Formattable} from "./interfaces/Formattable";
+import {Invoice} from "./classes/Invoice";
+import {Payment} from "./classes/Payment";
 
-    speak(text: string): void;
+let doc1: Formattable;
+let doc2: Formattable;
 
-    spend(amount: number): number;
-}
+doc1 = new Invoice("tom", "tom's website", 250);
+doc2 = new Payment("bob", "bob's website", 300);
 
-let me: IsPerson = {
-    name: "tom",
-    age: 20,
-    speak(text: string) {
-        console.log(text);
-    },
-    spend(amount: number): number {
-        console.log("spent:", amount);
-        return amount;
-    }
-}
-console.log(me);
+console.log(doc1.format(), doc2.format());
 
-const greetPerson = (person: IsPerson) => {
-    console.log("hello", person.name);
-}
-
-greetPerson(me);
-
-import {Invoice} from "./classes/Invoice.js";
-
-const invOne = new Invoice("tom", "work on the website", 123);
-const invTwo = new Invoice("bob", "work on the music", 34);
-console.log(invOne, invTwo);
-
-let invoices: Invoice[] = [];
-invoices.push(invOne);
-invoices.push(invTwo);
-
-invoices.forEach(i => {
-    console.log(i.client, i.amount, "|", i.format());
-})
-
-// inputs
-{
-    const anchor = document.querySelector("a");
-
-    if (anchor) {
-        console.log(anchor.href);
-    }
-
-    const form = document.querySelector(".new-item-form") as HTMLFormElement;
-    console.log(form.children);
-
-// inputs
-    const type = document.querySelector("#type") as HTMLSelectElement;
-    const tofrom = document.querySelector("#tofrom") as HTMLInputElement;
-    const details = document.querySelector("#details") as HTMLInputElement;
-    const amount = document.querySelector("#amount") as HTMLInputElement;
-
-    form.addEventListener("submit", (e: Event) => {
-        e.preventDefault();
-        console.log(
-            type.value,
-            tofrom.value,
-            details.value,
-            amount.valueAsNumber
-        );
-    })
-}
