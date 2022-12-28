@@ -1,4 +1,4 @@
-export class ListTemplate {
+export class ListRenderer {
     constructor(container) {
         this.container = container;
     }

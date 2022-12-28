@@ -1,6 +1,6 @@
 import {Formattable} from "../interfaces/Formattable.js";
 
-export class ListTemplate {
+export class ListRenderer {
     constructor(private container: HTMLUListElement) {}
 
     render(item: Formattable, heading: string): void {

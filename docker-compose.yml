@@ -1,0 +1,7 @@
+services:
+  app:
+    image: nginx:1.23
+    ports:
+      - 80:80
+    volumes:
+      - ./public:/usr/share/nginx/html:ro
